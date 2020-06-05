@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<images market="en-WW">
+	<image>
+		<startdate>20200118</startdate>
+		<fullstartdate>202001180000</fullstartdate>
+		<enddate>20200119</enddate>
+		<url>/th?id=OHR.GypsumSand_ROW1290350019_1920x1080.jpg&amp;rf=LaDigue_1920x1080.jpg&amp;pid=hp</url>
+		<urlBase>/th?id=OHR.GypsumSand_ROW1290350019</urlBase>
+		<mobileUrlBase>/th?id=OHR.GypsumSand_ROW1290350019</mobileUrlBase>
+		<copyright>Gypsum sand dunes, White Sands National Park, New Mexico (© Grant Kaye/Cavan Images)</copyright>
+		<copyrightlink>javascript:void(0)</copyrightlink>
+		<headline></headline>
+		<drk>1</drk>
+		<top>1</top>
+		<bot>1</bot>
+		<hotspots></hotspots>
+	</image>
+	<tooltips>
+		<loadMessage>
+			<message>Loading...</message>
+		</loadMessage>
+		<previousImage>
+			<text>Previous image</text>
+		</previousImage>
+		<nextImage>
+			<text>Next image</text>
+		</nextImage>
+	</tooltips>
+</images>

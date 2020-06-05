@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -24,9 +25,18 @@ namespace Binger
 
 		public static void Set(Uri uri, Style style)
 		{
-			var s = new System.Net.WebClient().OpenRead(uri.ToString());
+			if (uri == null) { return; }
 
-			var img = System.Drawing.Image.FromStream(s);
+			Image img;
+
+			using (var client = new System.Net.WebClient())
+			{
+				using (var imageStream = client.OpenRead(uri.ToString()))
+				{
+					img = Image.FromStream(imageStream ?? throw new InvalidOperationException("Unablde to read the file."));
+				}
+			}
+			
 			var tempPath = Path.Combine(Path.GetTempPath(), "wallpaper.bmp");
 			img.Save(tempPath, System.Drawing.Imaging.ImageFormat.Bmp);
 
@@ -71,14 +81,16 @@ namespace Binger
 				default:
 					throw new ArgumentOutOfRangeException(nameof(style), style, null);
 			}
-
-			NativeMethods.SetSystemWallpaper(imageFilePath);
+			//NativeMethods.SetSystemWallpaper(imageFilePath);
 		}
 		public static void SetSlideShow(string path, int interval)
 		{
 			if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
 
-			var encodedPath = NativeMethods.Encode(path);
+			var encodedPath = Pidl.Encode(path);
+			//var pathTemp = Pidl.Decode("kEAFA8BUg/E0gouOpBhoYjAArADMdmBAvQkOcBAAAAAAAAAAAAAAAAAAAAAAAAQ9AEDAAAAAAs5T9CJEAIUaudGIJ1WYnV2cAgEAJAABA8uvb+E8Mu5T9CpLAAAAbQFAAAAAFAAAAAAAAAAAAAAAAAAAAwy3vEgQAkGAuBwZAACAJBQbAEGAnBQZAMHAAAgGAMJAAAwJA8uvFCAAAEzUQN1td66/Nyx/DFIjECkOjOXLpBAAAQGAAAAAfAAAAwCAAAwdAkGAuBAZA8GA3BwcA4CApBQbA0GAlBgcAMHApBgdAUGAjBwbA4GA0BgcA8GAsBAcAEGAuBQZAwGAfBwYAcHA1AgbAEDAoBgMAQHA4BQeAUGA3BQeAAAAAAAAAAAAAAgGAAAA");
+			//pathTemp = Pidl.Decode("NGAFA8BUg/E0gouOpBhoYjAArADMdSBAuAI160KJpVKMFhZ4rKQ+BpHqcBQMAAAAAAg3MBmKQAwVhxGbwFGclJHAEBQCAQAAv7bfHJOjezEYq4CAAAQxaCAAAAQAAAAAAAAAAAAAAAAAAAAAMMh6AcFAhBAbAwGAwBQYAAHAlBgcAAAAYAwBBEDAAAAAA03RjzIEAMEap5WZzVGIwFWauRXaud2cAQFAJAABA8uv9d04M23RjzoLAAAAurJAAAAABAAAAAAAAAAAAAAAAAAAAUfqqCwQAgGApBgbAUGAzBQZAACAwBQYAkGAuBAdAkGAuBwZAMHAAAAIAMJAAAwJA8uvFCAAAEzUQN1td66/Nyx/DFIjECkOjOXLpBAAAQGAAAAAfAAAAwCAAAwdAkGAuBAZA8GA3BwcA4CApBQbA0GAlBgcAMHApBgdAUGAjBwbA4GA0BgcA8GAsBAcAEGAuBQZAwGAfBwYAcHA1AgbAEDAoBgMAQHA4BQeAUGA3BQeAAAAAAAAAAAAAAAIAAAA");
+
 			var content = "[Slideshow]\r\nImagesRootPIDL=" + encodedPath;
 
 			var iniPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Microsoft\Windows\Themes\slideshow.ini");

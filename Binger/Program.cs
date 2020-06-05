@@ -18,7 +18,10 @@ namespace Binger
 
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new BingerUI());
+			using (var mainForm = new BingerUI())
+			{
+				Application.Run(mainForm);
+			}
 		}
 	}
 }
