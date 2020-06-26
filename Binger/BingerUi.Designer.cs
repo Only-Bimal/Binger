@@ -42,13 +42,7 @@
 			this.DownloadTimer = new System.Windows.Forms.Timer(this.components);
 			this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.ContainerMain = new System.Windows.Forms.SplitContainer();
-			this.MarketGroupBox = new System.Windows.Forms.GroupBox();
-			this.MarketRadioButton = new System.Windows.Forms.RadioButton();
-			this.CountryDropdown = new System.Windows.Forms.ComboBox();
-			this.CountryRadioButton = new System.Windows.Forms.RadioButton();
-			this.MarketDropdown = new System.Windows.Forms.ComboBox();
 			this.CloseOptionsGroupBox = new System.Windows.Forms.GroupBox();
-			this.UseHttpsCheckBox = new System.Windows.Forms.CheckBox();
 			this.OpenMinimizedCheckBox = new System.Windows.Forms.CheckBox();
 			this.CloseToTrayCheckBox = new System.Windows.Forms.CheckBox();
 			this.StartupGroupbox = new System.Windows.Forms.GroupBox();
@@ -62,7 +56,6 @@
 			this.ContainerMain.Panel1.SuspendLayout();
 			this.ContainerMain.Panel2.SuspendLayout();
 			this.ContainerMain.SuspendLayout();
-			this.MarketGroupBox.SuspendLayout();
 			this.CloseOptionsGroupBox.SuspendLayout();
 			this.StartupGroupbox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.DownloadDurationControl)).BeginInit();
@@ -136,7 +129,7 @@
 			// EncodeButton
 			// 
 			this.EncodeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.EncodeButton.Location = new System.Drawing.Point(493, 16);
+			this.EncodeButton.Location = new System.Drawing.Point(493, 17);
 			this.EncodeButton.Margin = new System.Windows.Forms.Padding(2);
 			this.EncodeButton.Name = "EncodeButton";
 			this.EncodeButton.Size = new System.Drawing.Size(72, 27);
@@ -191,7 +184,6 @@
 			// 
 			// ContainerMain.Panel1
 			// 
-			this.ContainerMain.Panel1.Controls.Add(this.MarketGroupBox);
 			this.ContainerMain.Panel1.Controls.Add(this.CloseOptionsGroupBox);
 			this.ContainerMain.Panel1.Controls.Add(this.StartupGroupbox);
 			this.ContainerMain.Panel1.Controls.Add(this.FolderGroupBox);
@@ -206,76 +198,8 @@
 			this.ContainerMain.SplitterWidth = 3;
 			this.ContainerMain.TabIndex = 7;
 			// 
-			// MarketGroupBox
-			// 
-			this.MarketGroupBox.Controls.Add(this.MarketRadioButton);
-			this.MarketGroupBox.Controls.Add(this.CountryDropdown);
-			this.MarketGroupBox.Controls.Add(this.CountryRadioButton);
-			this.MarketGroupBox.Controls.Add(this.MarketDropdown);
-			this.MarketGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.MarketGroupBox.Location = new System.Drawing.Point(0, 207);
-			this.MarketGroupBox.Margin = new System.Windows.Forms.Padding(2);
-			this.MarketGroupBox.Name = "MarketGroupBox";
-			this.MarketGroupBox.Padding = new System.Windows.Forms.Padding(2);
-			this.MarketGroupBox.Size = new System.Drawing.Size(654, 54);
-			this.MarketGroupBox.TabIndex = 7;
-			this.MarketGroupBox.TabStop = false;
-			// 
-			// MarketRadioButton
-			// 
-			this.MarketRadioButton.AutoSize = true;
-			this.MarketRadioButton.Location = new System.Drawing.Point(273, 21);
-			this.MarketRadioButton.Name = "MarketRadioButton";
-			this.MarketRadioButton.Size = new System.Drawing.Size(62, 19);
-			this.MarketRadioButton.TabIndex = 3;
-			this.MarketRadioButton.Text = "&Market";
-			this.MarketRadioButton.UseVisualStyleBackColor = true;
-			this.MarketRadioButton.CheckedChanged += new System.EventHandler(this.MarketRadioButton_CheckedChanged);
-			// 
-			// CountryDropdown
-			// 
-			this.CountryDropdown.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::Binger.Properties.Settings.Default, "UseCountry", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.CountryDropdown.DisplayMember = "Key";
-			this.CountryDropdown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.CountryDropdown.Enabled = global::Binger.Properties.Settings.Default.UseCountry;
-			this.CountryDropdown.FormattingEnabled = true;
-			this.CountryDropdown.Location = new System.Drawing.Point(86, 19);
-			this.CountryDropdown.Name = "CountryDropdown";
-			this.CountryDropdown.Size = new System.Drawing.Size(141, 23);
-			this.CountryDropdown.TabIndex = 2;
-			this.CountryDropdown.ValueMember = "Value";
-			this.CountryDropdown.SelectedIndexChanged += new System.EventHandler(this.CountryChanged);
-			this.CountryDropdown.SelectionChangeCommitted += new System.EventHandler(this.CountryChanged);
-			// 
-			// CountryRadioButton
-			// 
-			this.CountryRadioButton.AutoSize = true;
-			this.CountryRadioButton.Location = new System.Drawing.Point(12, 20);
-			this.CountryRadioButton.Name = "CountryRadioButton";
-			this.CountryRadioButton.Size = new System.Drawing.Size(68, 19);
-			this.CountryRadioButton.TabIndex = 1;
-			this.CountryRadioButton.Text = "&Country";
-			this.CountryRadioButton.UseVisualStyleBackColor = true;
-			this.CountryRadioButton.CheckedChanged += new System.EventHandler(this.CountryRadioButton_CheckedChanged);
-			// 
-			// MarketDropdown
-			// 
-			this.MarketDropdown.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", global::Binger.Properties.Settings.Default, "UseMarket", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.MarketDropdown.DisplayMember = "Key";
-			this.MarketDropdown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.MarketDropdown.Enabled = global::Binger.Properties.Settings.Default.UseMarket;
-			this.MarketDropdown.FormattingEnabled = true;
-			this.MarketDropdown.Location = new System.Drawing.Point(347, 19);
-			this.MarketDropdown.Name = "MarketDropdown";
-			this.MarketDropdown.Size = new System.Drawing.Size(141, 23);
-			this.MarketDropdown.TabIndex = 0;
-			this.MarketDropdown.ValueMember = "Value";
-			this.MarketDropdown.SelectedIndexChanged += new System.EventHandler(this.MarketChanged);
-			this.MarketDropdown.SelectionChangeCommitted += new System.EventHandler(this.MarketChanged);
-			// 
 			// CloseOptionsGroupBox
 			// 
-			this.CloseOptionsGroupBox.Controls.Add(this.UseHttpsCheckBox);
 			this.CloseOptionsGroupBox.Controls.Add(this.OpenMinimizedCheckBox);
 			this.CloseOptionsGroupBox.Controls.Add(this.CloseToTrayCheckBox);
 			this.CloseOptionsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
@@ -286,20 +210,6 @@
 			this.CloseOptionsGroupBox.Size = new System.Drawing.Size(654, 54);
 			this.CloseOptionsGroupBox.TabIndex = 6;
 			this.CloseOptionsGroupBox.TabStop = false;
-			// 
-			// UseHttpsCheckBox
-			// 
-			this.UseHttpsCheckBox.AutoSize = true;
-			this.UseHttpsCheckBox.Checked = global::Binger.Properties.Settings.Default.UseHttps;
-			this.UseHttpsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.UseHttpsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Binger.Properties.Settings.Default, "UseHttps", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.UseHttpsCheckBox.Location = new System.Drawing.Point(469, 21);
-			this.UseHttpsCheckBox.Margin = new System.Windows.Forms.Padding(2);
-			this.UseHttpsCheckBox.Name = "UseHttpsCheckBox";
-			this.UseHttpsCheckBox.Size = new System.Drawing.Size(77, 19);
-			this.UseHttpsCheckBox.TabIndex = 2;
-			this.UseHttpsCheckBox.Text = "Use &Https";
-			this.UseHttpsCheckBox.UseVisualStyleBackColor = true;
 			// 
 			// OpenMinimizedCheckBox
 			// 
@@ -403,7 +313,7 @@
 			// CloseButton
 			// 
 			this.CloseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.CloseButton.Location = new System.Drawing.Point(573, 16);
+			this.CloseButton.Location = new System.Drawing.Point(573, 17);
 			this.CloseButton.Margin = new System.Windows.Forms.Padding(2);
 			this.CloseButton.Name = "CloseButton";
 			this.CloseButton.Size = new System.Drawing.Size(72, 27);
@@ -435,8 +345,6 @@
 			this.ContainerMain.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.ContainerMain)).EndInit();
 			this.ContainerMain.ResumeLayout(false);
-			this.MarketGroupBox.ResumeLayout(false);
-			this.MarketGroupBox.PerformLayout();
 			this.CloseOptionsGroupBox.ResumeLayout(false);
 			this.CloseOptionsGroupBox.PerformLayout();
 			this.StartupGroupbox.ResumeLayout(false);
@@ -468,12 +376,6 @@
 		private System.Windows.Forms.GroupBox CloseOptionsGroupBox;
 		private System.Windows.Forms.CheckBox CloseToTrayCheckBox;
 		private System.Windows.Forms.CheckBox OpenMinimizedCheckBox;
-		private System.Windows.Forms.GroupBox MarketGroupBox;
-		private System.Windows.Forms.ComboBox MarketDropdown;
-		private System.Windows.Forms.ComboBox CountryDropdown;
-		private System.Windows.Forms.RadioButton CountryRadioButton;
-		private System.Windows.Forms.RadioButton MarketRadioButton;
-		private System.Windows.Forms.CheckBox UseHttpsCheckBox;
 		private System.Windows.Forms.Button OpenDestinationButton;
 	}
 }

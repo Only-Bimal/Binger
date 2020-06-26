@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
+using Binger.Properties;
 
 namespace Binger
 {
@@ -19,6 +21,7 @@ namespace Binger
 			Countries.Add(new KeyValuePair<string, string>("Brazil", "br"));
 			Countries.Add(new KeyValuePair<string, string>("Canada", "ca"));
 			Countries.Add(new KeyValuePair<string, string>("China", "cn"));
+			Countries.Add(new KeyValuePair<string, string>("India", "in"));
 			Countries.Add(new KeyValuePair<string, string>("Germany", "de"));
 			Countries.Add(new KeyValuePair<string, string>("France", "fr"));
 			Countries.Add(new KeyValuePair<string, string>("Japan", "jp"));
@@ -35,11 +38,20 @@ namespace Binger
 
 		#region Properties
 		public static bool UseHttps { get; set; }
-		
+
 		public static string Country { get; set; }
 		public static bool UseCountry { get; set; }
 
 		#endregion
+
+		private static void Download()
+		{
+			foreach (var image in Countries.Select(country => new BingImage { Country = country.Value }))
+			{
+				image.Download(Settings.Default.FolderPath);
+			}
+		}
+
 		public static void DownloadImage(string imageFolder)
 		{
 			if (!Directory.Exists(imageFolder)) { Directory.CreateDirectory(imageFolder); }
@@ -54,7 +66,7 @@ namespace Binger
 				//using (var client = new WebClient()) client.DownloadFile("http://www.bing.com" + response + "_1920x1200.jpg", imageFileName);
 				//using (var client = new WebClient()) client.DownloadFile(image.Url, imageFileName);
 
-				var imageFileName = Path.ChangeExtension(Path.Combine(imageFolder, image.ImageDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)), ".jpg");
+				var imageFileName = Path.Combine(imageFolder, image.ImageFileName);
 
 				if (!File.Exists(imageFileName))
 				{
@@ -75,6 +87,7 @@ namespace Binger
 				imageFile.SetMetaValue(MetaProperty.Comment, image.Comment);
 				imageFile.SetMetaValue(MetaProperty.DateTime, image.ImageDate.ToString(CultureInfo.InvariantCulture));
 				imageFile.SetMetaValue(MetaProperty.Title, image.Title);
+				imageFile.SetMetaValue(MetaProperty.Keywords, image.Copyright);
 			}
 		}
 
@@ -99,16 +112,16 @@ namespace Binger
 			}
 		}
 
-/*
-		private static void ProcessXml(ref string xmlString)
-		{
-			using (var reader = System.Xml.XmlReader.Create(new StringReader(xmlString)))
-			{
-				reader.ReadToFollowing("urlBase");
-				xmlString = reader.ReadElementContentAsString();
-			}
-		}
-*/
+		/*
+				private static void ProcessXml(ref string xmlString)
+				{
+					using (var reader = System.Xml.XmlReader.Create(new StringReader(xmlString)))
+					{
+						reader.ReadToFollowing("urlBase");
+						xmlString = reader.ReadElementContentAsString();
+					}
+				}
+		*/
 
 		private static BingImage GetImageData(string xmlString)
 		{
