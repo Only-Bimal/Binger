@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using Binger.Properties;
 
 namespace Binger
@@ -44,12 +45,20 @@ namespace Binger
 
 		#endregion
 
-		private static void Download()
+		public static void Download(string imageFolder)
 		{
-			foreach (var image in Countries.Select(country => new BingImage { Country = country.Value }))
+			Parallel.ForEach(Countries, country =>
 			{
-				image.Download(Settings.Default.FolderPath);
-			}
+				var image = new BingImage { Country = country.Value };
+				image.Download(imageFolder);
+			});
+
+			//foreach (var image in Countries.Select(country => new BingImage { Country = country.Value }))
+			//{
+			//	image.Download(imageFolder);
+			//}
+
+			DuplicateHandler.RemoveDuplicates(imageFolder);
 		}
 
 		public static void DownloadImage(string imageFolder)
@@ -61,10 +70,6 @@ namespace Binger
 				string response = null;
 				Connect(ref response, i);
 				var image = GetImageData(response);
-
-				//ProcessXml(ref response);
-				//using (var client = new WebClient()) client.DownloadFile("http://www.bing.com" + response + "_1920x1200.jpg", imageFileName);
-				//using (var client = new WebClient()) client.DownloadFile(image.Url, imageFileName);
 
 				var imageFileName = Path.Combine(imageFolder, image.ImageFileName);
 

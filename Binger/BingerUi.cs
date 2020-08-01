@@ -41,7 +41,8 @@ namespace Binger
 
 		private void DownloadButton_Click(object sender, EventArgs e)
 		{
-			Binger.DownloadImage(Settings.Default.FolderPath);
+			Binger.Download(Settings.Default.FolderPath);
+			//Binger.DownloadImage(Settings.Default.FolderPath);
 		}
 
 		private void DownloadTimer_Tick(object sender, EventArgs e)

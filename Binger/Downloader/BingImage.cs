@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -7,6 +8,7 @@ namespace Binger
 {
 	public class BingImage
 	{
+		internal static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 		private Uri _imageUrl;
 		public string Url
 		{
@@ -27,22 +29,25 @@ namespace Binger
 
 		public void Download(string imageFolder)
 		{
+			Directory.CreateDirectory(imageFolder);
+
 			for (var i = 0; i < 9; i++)
 			{
 				try
 				{
 					GetXml(i);
 					// Get Success, Download the image
-					var imageFileName = Path.Combine(imageFolder, ImageFileName);
+					var imageFilePath = Path.Combine(imageFolder, ImageFileName);
 
-					if (File.Exists(imageFileName)) { continue; }
+					if (File.Exists(imageFilePath)) { continue; }
 
 					using (var client = new WebClient())
 					{
-						client.DownloadFile(Url, imageFileName);
+						client.DownloadFile(Url, imageFilePath);
+						SetProperties(imageFilePath);
 					}
 				}
-				catch { /*Ignore*/ }
+				catch (Exception ex) { Logger.Error(ex, Url); }
 			}
 
 		}
@@ -99,6 +104,18 @@ namespace Binger
 						Comment = value;
 						break;
 				}
+			}
+		}
+
+		private void SetProperties(string imageFileName)
+		{
+			using (var imageFile = Image.FromFile(imageFileName))
+			{
+				imageFile.SetMetaValue(MetaProperty.Copyright, Copyright);
+				imageFile.SetMetaValue(MetaProperty.Comment, Comment);
+				imageFile.SetMetaValue(MetaProperty.DateTime, ImageDate.ToString(CultureInfo.InvariantCulture));
+				imageFile.SetMetaValue(MetaProperty.Title, Title);
+				imageFile.SetMetaValue(MetaProperty.Keywords, Copyright);
 			}
 		}
 	}

@@ -64,6 +64,12 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Magick.NET-Q16-HDRI-AnyCPU, Version=7.20.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\Magick.NET-Q16-HDRI-AnyCPU.7.20.0.1\lib\net40\Magick.NET-Q16-HDRI-AnyCPU.dll</HintPath>
+    </Reference>
+    <Reference Include="Magick.NET.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\Magick.NET.Core.3.0.0\lib\net40\Magick.NET.Core.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.7.2\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -91,22 +97,24 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Binger.cs" />
+    <Compile Include="API\NativeMethods.cs" />
+    <Compile Include="Downloader\Binger.cs" />
     <Compile Include="BingerUi.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BingerUi.Designer.cs">
       <DependentUpon>BingerUi.cs</DependentUpon>
     </Compile>
-    <Compile Include="BingImage.cs" />
-    <Compile Include="EnumLocalizer.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="NativeMethods.cs" />
-    <Compile Include="Pidl.cs" />
-    <Compile Include="SlideShowInterval.cs" />
+    <Compile Include="Downloader\BingImage.cs" />
+    <Compile Include="DuplicateHandler\DuplicateHandler.cs" />
+    <Compile Include="Slideshow\EnumLocalizer.cs" />
+    <Compile Include="Image Properties\Extensions.cs" />
+    <Compile Include="Slideshow\NativeMethods.cs" />
+    <Compile Include="Slideshow\Pidl.cs" />
+    <Compile Include="Slideshow\SlideShowInterval.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wallpaper.cs" />
+    <Compile Include="Slideshow\Wallpaper.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
@@ -128,7 +136,7 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="app.manifest" />
-    <None Include="Exif Properties.xlsx" />
+    <None Include="Image Properties\Exif Properties.xlsx" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -164,7 +172,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Bing Image Structure.xml" />
+    <Content Include="Image Properties\Bing Image Structure.xml" />
     <Content Include="Bing.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +186,7 @@
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.3.0.0\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

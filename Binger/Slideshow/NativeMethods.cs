@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Binger
 {
-	internal class NativeMethods
+	 internal partial class NativeMethods
 	{
 		#region Enumerations
 
