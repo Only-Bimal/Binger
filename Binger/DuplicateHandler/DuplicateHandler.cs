@@ -37,7 +37,8 @@ namespace Binger
 
 				foreach (var file in files.Where(file => !file.FileName.Equals(fileToKeep.FileName, StringComparison.OrdinalIgnoreCase)))
 				{
-					NativeMethods.DeleteCompletelySilent(file.FileName);
+					//NativeMethods.DeleteCompletelySilent(file.FileName);
+					NativeMethods.MoveToRecycleBin(file.FileName);
 				}
 			});
 
